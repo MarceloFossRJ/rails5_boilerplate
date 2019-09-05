@@ -1,0 +1,20 @@
+<script>
+    function setType(type)
+    {
+        document.getElementById("submit_type_id").value = type;
+    }
+</script>
+<input type="hidden" name="submit_type" id="submit_type_id" value="new">
+<div class="form-actions">
+  <%= f.button :submit, "#{f.object.new_record? ? 'Create' : 'Update'}", :class => 'btn-primary' %>
+  <% if f.object.new_record? %>
+    <%= f.button :submit, 'Create & Add New', :class => 'btn-primary', :onClick => "setType('add')".html_safe  %>
+  <% end %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+              return_path, :class => 'btn btn-secondary' %>
+</div>
+
+
+
+
+

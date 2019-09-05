@@ -1,0 +1,2 @@
+module CancelAccountHelper
+end

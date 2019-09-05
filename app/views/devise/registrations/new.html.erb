@@ -1,0 +1,40 @@
+<h2>Sign up</h2>
+
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :email,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "email" }%>
+    <%= f.input :subdomain,
+                required: true,
+                input_html: { autocomplete: "subdomain" }%>
+    <%= f.input :name,
+                required: true,
+                input_html: { autocomplete: "name" }%>
+    <%= f.input :country,
+                required: true,
+                input_html: { autocomplete: "country" }%>
+    <%= f.input :mobile_phone,
+                required: true,
+                input_html: { autocomplete: "mobile phone number" }%>
+    <%= f.input :zipcode,
+                required: true,
+                input_html: { autocomplete: "zipcode" }%>
+    <%= f.input :password,
+                required: true,
+                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                input_html: { autocomplete: "new-password" } %>
+    <%= f.input :password_confirmation,
+                required: true,
+                input_html: { autocomplete: "new-password" } %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Sign up", :class => 'btn-primary' %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>

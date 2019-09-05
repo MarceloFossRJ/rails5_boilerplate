@@ -1,0 +1,60 @@
+<!-- Tab menu-->
+<%
+  classe_index = classe_new = classe_edit = classe_show = classe_versions = classe_version = "nav-link"
+  case action
+    when "index"
+      classe_index = "nav-link active"
+    when "new"
+      classe_new = "nav-link active"
+    when "edit"
+      classe_edit = "nav-link active"
+    when "show"
+      classe_show = "nav-link active"
+  end
+%>
+
+<ul class="nav nav-tabs flex-wrap">
+  <% if !defined?(abas) || abas.include?('index')%>
+  <li class="nav-item" >
+      <%= link_to "Index", {controller: controller_class , action: "index"}, class: classe_index %>
+  </li>
+  <% end %>
+  <% if !defined?(abas) || abas.include?('new')%>
+  <li class="nav-item" >
+      <%= link_to "Novo", {controller: controller_class , action: "new"}, class: classe_new %>
+  </li>
+  <% end %>
+
+  <% if action=="edit" || action=="show" || action=="version" %>
+      <li class="nav-item">
+        <%= link_to "Editar",{controller: controller_class , action: "edit"}, class: classe_edit %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Visualizar",{controller: controller_class , action: "show"}, class: classe_show %>
+      </li>
+  <% end %>
+
+
+  <% if action=="index" %>
+
+      <li class="nav-item ml-auto">
+        <a class="nav-link" href="#AdvancedSearch" data-toggle="modal">Busca avançada</a>
+      </li>
+
+      <li class="nav-item hide_mobile">
+      <%= search_form_for @q, :html => { :class => 'h-75 navbar-search form-inline float-right', :id => 'quick_search'}   do |f| %>
+            <%= f.search_field search_field, :class => 'form-control form-control-sm', :placeholder => "Busca rápida"  %>
+
+            <button type="button" class="close pl-1" aria-label="Close">
+              <span aria-hidden="true"
+                    onclick="document.getElementById('q_<%=search_field%>').value='';
+                        document.getElementById('quick_search').submit();">
+                &times;
+              </span>
+            </button>
+        <% end %>
+      </li>
+  <% end %>
+
+</ul>
+&nbsp;
