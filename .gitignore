@@ -38,8 +38,5 @@ production.env
 
 breakman.html
 
-# Ignore application configuration
-/config/application.yml
-
 #ignore carrierwave uploads
 public/uploads

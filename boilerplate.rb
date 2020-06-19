@@ -152,6 +152,13 @@ after_bundle do
   copy_file ".rspec"
   copy_file ".gitignore"
   
+  insert_into_file '.gitignore', after: "breakman.html" do <<-CODE
+    
+    # Ignore application configuration
+    /config/application.yml
+    CODE
+  end
+  
   # Migrate
   #rails_command "db:create"
   #rails_command "db:migrate"

@@ -1,0 +1,45 @@
+
+development:
+  AMBIENTE: "development"
+  APPLICATION_NAME: "APPLICATION_NAME"
+  DATABASE_URL: "postgresql://DB_USER_NAME:DB_USER_PWD_@localhost:5432/DATABASE_NAME?encoding=utf8&pool=5&timeout=5000&schema_search_path=public,hstore"
+  SECRET_KEY_BASE:  
+
+  SENDMAIL_HOST: "lvh.me:4000"
+  SENDMAIL_DOMAIN: "lvh.me:4000"
+  SENDMAIL_ADDRESS: ""
+  SENDMAIL_USERNAME: ""
+  SENDMAIL_PASSWORD: ""
+  SENDMAIL_PORT: ""
+  SENDMAIL_DEVISE: ""
+  SUPPORT_EMAIL: ""
+
+  REDIS_URL: "redis://localhost:6379"
+  CABLE_URL: "redis://localhost:6379/1"
+  CACHE_URL: "redis://localhost:6379/0/cache"
+  JOB_URL: "redis://localhost:6379/2"
+
+  DOMAIN_NAME: "lvh.me" # used at config/session_store.rb; app/views/layouts/mailer.html.erb
+
+  GITHUB_APP_ID: ""
+  GITHUB_SECRET: ""
+  GOOGLE_APP_ID: ""
+  GOOGLE_SECRET: ""
+  LINKEDIN_APP_ID: ""
+  LINKEDIN_SECRET: ""
+
+  PUMA_PORT: "4000"
+
+test:
+  DATABASE_URL: ""
+  SECRET_KEY_BASE:  
+  EMAIL_USER_DOMAIN: ""
+  EMAIL_ADDRESS: ""
+  EMAIL_USER_NAME: ""
+  EMAIL_PASSWORD: ""
+  EMAIL_PORT: ""
+  REDIS_URL: "redis://localhost:6379"
+  CABLE_URL: "redis://localhost:6379/1"
+  CACHE_URL: "redis://localhost:6379/0/cache"
+  JOB_URL: "redis://localhost:6379/2"
+  DOMAIN_NAME: "lvh.me"
