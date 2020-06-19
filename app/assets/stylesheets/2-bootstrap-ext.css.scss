@@ -1,0 +1,107 @@
+// make all images responsive by default
+img {
+  @extend .img-fluid;
+  margin: 0 auto;
+}
+// override for the 'Home' navigation link
+//.navbar-brand {
+//  font-size: inherit;
+//  }
+
+.column {
+  @extend .col-md-6;
+  text-align: center;
+}
+.form {
+  @extend .col-md-6;
+}
+.form-centered {
+  @extend .col-md-6;
+  text-align: center;
+}
+.submit {
+  @extend .btn;
+  @extend .btn-primary;
+  @extend .btn-lg;
+}
+
+// apply styles to HTML elements
+// to make views framework-neutral
+main {
+  @extend .container;
+  margin-top: 30px; // accommodate the navbar
+}
+
+section {
+  @extend .row;
+  margin-top: 20px;
+}
+
+@media (min-width: 767px) {
+  .navbar-brand-width {
+    width: 15.625rem;
+  }
+}
+
+.site-margin {
+  margin-top: 70px;
+}
+
+ul {
+  margin: 0;
+  padding:0
+}
+
+@media (max-width: 767px) {
+  .hide_mobile {
+    display: none;
+  }
+}
+
+.jumbotron {
+  background-image:image-url("site/journeyctrl_1.jpg");
+  color:#fff;
+  margin-top: -14px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+.btn-primary:visited,
+.btn-secondary:visited,
+.btn-success:visited,
+.btn-danger:visited,
+.btn-warning:visited,
+.btn-info:visited,
+.btn-dark:visited {
+  color:white;
+}
+
+.btn-light:visited {
+  color: black;
+}
+
+.container-transparent {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.navbar-align-center {
+  align-items: center;
+  display: flex;
+}
+
+/* overhide sidebar css */
+.list-unstyled {
+  line-height: 28px;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  margin-bottom: 0.7rem;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 400;
+  line-height: 1.2;
+  color: inherit;
+}
+

@@ -1,34 +1,35 @@
 class ErrorsController < ApplicationController
-  before_action :set_status
+  layout "error"
 
   def not_found
-    respond_to do |format|
-      format.html { render status: 404 }
-      format.json { render json: { error: "Resource not found" }, status: 404 }
+    begin
+      @exception = request.env["action_dispatch.exception"]
+      @message = @exception.message.to_s
+      @date = Time.now.utc.to_s
+    ensure
+      render status: 404, template: "errors/not_found.html.erb"
     end
   end
 
-  def unacceptable
-    respond_to do |format|
-      format.html { render status: 422 }
-      format.json { render json: { error: "Params unacceptable" }, status: 422 }
+  def server_error
+    begin
+      @exception = request.env["action_dispatch.exception"]
+      exception_wrapper = ActionDispatch::ExceptionWrapper.new(request.env['action_dispatch.backtrace_cleaner'], @exception)
+
+      @message = @exception.message.to_s
+      @source_extracts = exception_wrapper.source_extracts[0..9].join("\n")
+      @backtrace = @exception.backtrace[0..9].join("/n")
+      @date = Time.now.utc.to_s
+      @file = exception_wrapper.file
+      @line_number = exception_wrapper.line_number
+
+      if ENV['AMBIENTE'] != 'development'
+        mail = ErrorMailer.server_error(@date, @message, @file, @line_number, @backtrace, @source_extracts)
+        mail.deliver_later
+      end
+    ensure
+      render status: 500, template: "errors/server_error.html.erb"
     end
   end
-
-  def internal_error
-    respond_to do |format|
-      format.html { render status: 500 }
-      format.json { render json: { error: "Internal server error" }, status: 500 }
-    end
-  end
-
-  private
-
-  def set_status
-      @exception = env['action_dispatch.exception']
-      @status    = ActionDispatch::ExceptionWrapper.new(env, @exception).status_code
-      @response  = ActionDispatch::ExceptionWrapper.rescue_responses[@exception.class.name]
-  end
-
 
 end

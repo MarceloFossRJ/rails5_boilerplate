@@ -1,0 +1,12 @@
+<%= render partial: 'layouts/header', locals: {title: "Workspace "} %>
+<%= render partial: 'layouts/tabs', locals: {controller_class: controller_name , action: "show", search_field:""} %>
+
+<p>
+  <strong>Subdomain name:</strong>
+  <%= @workspace.subdomain %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @workspace.name %>
+</p>

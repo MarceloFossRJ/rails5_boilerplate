@@ -1,0 +1,11 @@
+
+<h3>Hey <%= @invitation.email %>. Hi!</h3>
+
+<p>You were invited by <%= @sender.name %> to join the workspace <%= @workspace.name %> at the
+<%=ENV["APPLICATION_NAME"]%>.</p>
+
+<p>So come along and follow the link below to join it and register yourself to <%= @workspace.name %>.</p>
+
+<p><%= link_to "Join #{@workspace.name}", new_user_registration_url(invitation_token: @invitation.token) %></p>
+
+<p>If you do not know <%= @sender.name %>, please disregard this email.</p>

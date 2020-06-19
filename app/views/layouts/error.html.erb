@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<%= render 'layouts/app_head' %>
+<body class="site-margin">
+<header>
+    <nav class="navbar navbar-dark bg-dark navbar-expand-lg fixed-top">
+        <%= link_to ENV["APPLICATION_NAME"], root_path, class: 'navbar-brand' %>
+        <% if !user_signed_in? %>
+            <ul class="nav navbar-nav flex-row justify-content-md-center justify-content-start flex-nowrap navbar-align-center">
+              <li class="nav-item">
+                <a href="<%= new_user_registration_path %>" class="nav-link ml-3">
+                  <i class="fa fa-user-plus"></i>&nbsp;Sign Up</a>
+              </li>
+              <li class="nav-item">
+                <a href="<%= new_user_session_path %>" class="nav-link ml-3">
+                  <i class="fa fa-sign-in-alt"></i>&nbsp;Login</a>
+              </li>
+            </ul>
+        <% end %>
+    </nav>
+</header>
+<%= yield %>
+<%= render 'layouts/app_footer' %>
+</body>
+</html>

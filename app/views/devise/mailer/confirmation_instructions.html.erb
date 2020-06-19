@@ -1,5 +1,10 @@
-<p>Welcome <%= @email %>!</p>
+<h3>Hey <%= @resource.name %>. Hi!</h3>
 
-<p>You can confirm your account email through the link below:</p>
+<p>We'll communicate with you from time to time via email
+so it's important that we have an up-to-date email address on file.</p>
+
+<p>Please confirm your email address by clicking on the link below:</p>
 
 <p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+
+<p>If you did not sign up for <%=ENV["APPLICATION_NAME"]%> account please disregard this email.</p>

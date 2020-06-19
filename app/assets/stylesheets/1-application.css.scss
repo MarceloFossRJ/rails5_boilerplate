@@ -1,0 +1,37 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require fontawesome-5/css/all
+ *= require bootstrap-datepicker.standalone.min
+ *= require daterangepicker
+ *= require sidebar.css
+ *= require open-sans/open-sans
+ *= require perfect-scrollbar
+ *= require sidebar.menu.css
+ *= require select2
+ *= require select2-bootstrap
+ *= require_self
+ */
+@import "bootstrap";
+// font-awesome styles
+$fa-font-path: "./fontawesome-5/webfonts";
+@import "./fontawesome-5/scss/fontawesome.scss";
+@import "./fontawesome-5/scss/solid.scss";
+@import "./fontawesome-5/scss/brands.scss";
+
+// Bootstrap replacement font for H tags
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+// simple_form helpers
+//@import "simple_form-bootstrap/simple_form-bootstrap";
+

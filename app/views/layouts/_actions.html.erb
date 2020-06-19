@@ -1,7 +1,7 @@
 <div class="btn-group" role="group" aria-label="Basic example">
 <% if defined?(link_to_show) && link_to_show %>
   <%= link_to link_to_show, :class => 'btn btn-secondary btn-sm', title: "Show", data: { toggle: 'tooltip', placement: 'top' } do%>
-      <i class="fa fa-eye-slash"></i>
+      <i class="fa fa-glasses"></i>
   <% end %>
 <% end %>
 
@@ -13,7 +13,7 @@
 
 <% if defined?(link_to_delete) && link_to_delete %>
   <%= link_to link_to_delete, method: :delete, title: "Delete", data: { confirm: 'Are you sure?', toggle: 'tooltip', placement: 'top' }, :class => 'btn btn-danger btn-sm' do %>
-      <i class="fa fa-trash-o"></i>
+      <i class="fa fa-trash"></i>
   <% end %>
 <% end %>
 </div>

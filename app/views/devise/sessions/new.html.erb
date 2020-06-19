@@ -1,26 +1,55 @@
-<div class="row justify-content-center">
-  <div class="col-1 col-md-1">
-  </div>
-  <div class="col-10 col-md-5">
-    <%= render partial: 'layouts/header', locals: {title: "Login"} %>
-    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div class="form-inputs">
-        <%= f.input :email,
-                    required: false,
-                    autofocus: true,
-                    input_html: { autocomplete: "email" } %>
-        <%= f.input :password,
-                    required: false,
-                    input_html: { autocomplete: "current-password" } %>
-        <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
-      </div>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-10 col-md-6 ">
+      <div class="card">
+        <div class="card-body">
 
-      <div class="form-actions">
-        <%= f.button :submit, "Login", :class => 'btn btn-primary btn-block' %>
-      </div>
-    <% end %>
-    <%= render "devise/shared/links" %>
-  </div>
-  <div class="col-1 col-md-1">
-  </div>
-</div>
+          <h2 class="text-center">JourneyCtrl Log in</h2>
+          <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), wrapper: :input_group) do |f| %>
+              <%= f.input :email,
+                          required: false,
+                          autofocus: true,
+                          placeholder: "your@email.com",
+                          input_html: { autocomplete: "email" } %>
+              <%= f.input :password,
+                          required: false,
+                          placeholder: "Password",
+                          input_html: { autocomplete: "current-password" } %>
+              <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+
+            <div class="form-actions text-center">
+              <%= f.button :submit, "Log in", :class => 'btn btn-primary' %>
+            </div>
+          <% end %>
+
+          <div class="text-center">
+            <h5 class="text-muted">
+              <br>
+              <del><% 22.times do %>&nbsp;<% end %></del>
+              &nbsp;or&nbsp;
+              <del><% 22.times do %>&nbsp;<% end %></del>
+            </h5>
+            <h5 class="text-muted">Use your prefered social network</h5>
+            <%= render "devise/shared/oauth_links" %>
+            <%= render "devise/shared/links" %>
+          </div>
+
+        </div> <!-- div card-body -->
+      </div> <!-- div card -->
+    </div> <!-- div col -->
+  </div> <!-- div row -->
+</div> <!-- div container -->
+
+<script>
+    $(document).ready(function() {
+        $("#bt-github").click(function () {
+            window.location.href = '/auth/github';
+        });
+        $("#bt-linkedin").click(function () {
+            window.location.href = '/auth/linkedin';
+        });
+        $("#bt-google").click(function () {
+            window.location.href = '/auth/google_oauth2';
+        });
+    });
+</script>

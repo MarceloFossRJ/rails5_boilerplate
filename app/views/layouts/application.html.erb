@@ -1,13 +1,26 @@
 <!DOCTYPE html>
 <html>
-  <%= render 'layouts/head' %>
-  <body>
-    <header>
-      <%= render 'layouts/navigation' %>
-    </header>
-    <main role="main">
-       <%= render 'layouts/messages' %>
-      <%= yield %>
-    </main>
+  <%= render 'layouts/app_head' %>
+  <body class="<%= controller_name %> <%= action_name %>">
+    <%= render 'layouts/app_nav_header' %>
+    <div class="d-flex wrapper wrapper-navbar-used wrapper-navbar-fixed">
+      <%= render 'layouts/app_sidebar' %>
+      <div class="container-fluid">
+        <main role="main">
+          <div id="spinner" class="spinner"></div>
+          <%= render 'layouts/messages' %>
+          <%= yield %>
+        </main>
+      </div>
+    </div>
+    <%= render 'layouts/app_footer' %>
+      <script>
+          $(function() {
+              new Nanobar().go(100);
+              new PerfectScrollbar('.scrollbar');
+          });
+      </script>
+
+
   </body>
 </html>

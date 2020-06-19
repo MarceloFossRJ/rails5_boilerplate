@@ -1,40 +1,117 @@
-<h2>Sign up</h2>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-10 col-md-6 ">
+      <h2 class="text-center">Sign up</h2>
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), wrapper: :input_group) do |f| %>
+        <% if @invitation_token.to_s.length == 0 %>
+          <%= f.input :subdomain,
+                      required: true,
+                      placeholder: "Workspace subdomain",
+                      label: "Subdomain" %>
+        <% end %>
 
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "email" }%>
-    <%= f.input :subdomain,
-                required: true,
-                input_html: { autocomplete: "subdomain" }%>
-    <%= f.input :name,
-                required: true,
-                input_html: { autocomplete: "name" }%>
-    <%= f.input :country,
-                required: true,
-                input_html: { autocomplete: "country" }%>
-    <%= f.input :mobile_phone,
-                required: true,
-                input_html: { autocomplete: "mobile phone number" }%>
-    <%= f.input :zipcode,
-                required: true,
-                input_html: { autocomplete: "zipcode" }%>
-    <%= f.input :password,
-                required: true,
-                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: true,
-                input_html: { autocomplete: "new-password" } %>
+        <div class="text-center">
+          <h5 class="text-muted">Use your prefered social network</h5>
+          <%= render "devise/shared/oauth_links" %>
+          <h5 class="text-muted">
+            <del><% 22.times do %>&nbsp;<% end %></del>
+            &nbsp;or&nbsp;
+            <del><% 22.times do %>&nbsp;<% end %></del>
+          </h5>
+        </div>
+
+        <%= f.input :email,
+                    required: true,
+                    autofocus: true,
+                    placeholder: "your@email.com",
+                    input_html: { autocomplete: "email" }%>
+        <%= f.input :name,
+                    required: true,
+                    placeholder: "Full name",
+                    input_html: { autocomplete: "name" }%>
+        <%= f.input :password,
+                    required: true,
+                    placeholder: "At least 6 digits, 1 lowercase, 1 uppercase and 1 number",
+                    hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                    input_html: { autocomplete: "new-password" } %>
+        <%= f.input :password_confirmation,
+                    required: true,
+                    placeholder: "Password confirmation ",
+                    input_html: { autocomplete: "new-password" } %>
+        <% if @invitation_token.to_s.length > 0 %>
+          <%= hidden_field :user, :invitation_token, :value => @invitation_token %>
+        <% end %>
+
+        <div class="form-actions text-center">
+          <%= f.button :submit, "Sign up", :class => 'btn-primary' %>
+        </div>
+      <% end %>
+
+      <div class="text-center">
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
   </div>
+</div>
+<script>
+    $(document).ready(function(){
+        $("#bt-github").click(function(){
+            cleanErrorMsg();
+            toOmniAuth('github');
+        });
+        $("#bt-linkedin").click(function(){
+            cleanErrorMsg();
+            toOmniAuth('linkedin');
+        });
+        $("#bt-google").click(function(){
+            cleanErrorMsg();
+            toOmniAuth('google_oauth2');
+        });
 
-  <div class="form-actions">
-    <%= f.button :submit, "Sign up", :class => 'btn-primary' %>
-  </div>
-<% end %>
+        function invalidMsg(texto){
+            var element = document.getElementById("user_subdomain");
+            element.classList.add("is-invalid");
+            var node = document.createElement("div");
+            node.id = 'subdomain-error';
+            node.className = 'invalid-feedback d-block';
+            node.innerHTML = texto;
+            node.style.display = 'block';
+            document.getElementsByClassName("user_subdomain")[0].appendChild(node);
+        }
 
-<%= render "devise/shared/links" %>
+        function cleanErrorMsg(){
+            var a = document.querySelectorAll(".invalid-feedback");
+            for(let e of a){e.remove();}
+            var b = document.querySelectorAll(".is-invalid");
+            for(let e of b){e.classList.remove("is-invalid");}
+        }
+
+        function toOmniAuth(provider){
+            var subdomain = $('#user_subdomain').val().trim();
+            if(subdomain.length){
+                $.ajax({
+                    type: 'GET',
+                    dataType : 'json',
+                    url: "/authentications/validate_subdomain/" + subdomain,
+                })
+                    .done(function(r){
+                        if(r.is_valid){
+                            window.location.href = '/auth/' + provider;
+                            return true;
+                        } else {
+                            invalidMsg(r.errors);
+                            return false;
+                        }
+                    })
+                    .fail(function(jqXHR, textStatus, errorThrown){
+                        alert("fail. status: " + textStatus);
+                        return false;
+                    });
+            } else {
+                invalidMsg("Subdomain can't be blank");
+                return false;
+            }
+        }
+    });
+</script>

@@ -6,9 +6,18 @@
 </script>
 <input type="hidden" name="submit_type" id="submit_type_id" value="new">
 <div class="form-actions">
-  <%= f.button :submit, "#{f.object.new_record? ? 'Create' : 'Update'}", :class => 'btn-primary' %>
-  <% if f.object.new_record? %>
-    <%= f.button :submit, 'Create & Add New', :class => 'btn-primary', :onClick => "setType('add')".html_safe  %>
+  <%= f.button :submit,
+               "#{f.object.new_record? ? 'Create' : 'Update'}",
+               class: 'btn-primary',
+               data: {disabled_with: '<i class="fa fa-circle-o-notch fa-spin"></i> Loading ...' }
+  %>
+  <% if f.object.new_record? && add_new %>
+    <%= f.button :submit,
+                 'Create & Add New',
+                 class: 'btn-primary',
+                 onClick: "setType('add')".html_safe,
+                 data: {disabled_with: '<i class="fa fa-circle-o-notch fa-spin"></i> Loading ...' }
+    %>
   <% end %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
               return_path, :class => 'btn btn-secondary' %>

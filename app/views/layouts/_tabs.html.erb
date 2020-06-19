@@ -21,16 +21,16 @@
   <% end %>
   <% if !defined?(abas) || abas.include?('new')%>
   <li class="nav-item" >
-      <%= link_to "Novo", {controller: controller_class , action: "new"}, class: classe_new %>
+      <%= link_to "Add", {controller: controller_class , action: "new"}, class: classe_new %>
   </li>
   <% end %>
 
   <% if action=="edit" || action=="show" || action=="version" %>
       <li class="nav-item">
-        <%= link_to "Editar",{controller: controller_class , action: "edit"}, class: classe_edit %>
+        <%= link_to "Edit",{controller: controller_class , action: "edit"}, class: classe_edit %>
       </li>
       <li class="nav-item">
-        <%= link_to "Visualizar",{controller: controller_class , action: "show"}, class: classe_show %>
+        <%= link_to "View",{controller: controller_class , action: "show"}, class: classe_show %>
       </li>
   <% end %>
 
@@ -38,12 +38,12 @@
   <% if action=="index" %>
 
       <li class="nav-item ml-auto">
-        <a class="nav-link" href="#AdvancedSearch" data-toggle="modal">Busca avançada</a>
+        <a class="nav-link" href="#AdvancedSearch" data-toggle="modal">Advanced Search</a>
       </li>
 
       <li class="nav-item hide_mobile">
       <%= search_form_for @q, :html => { :class => 'h-75 navbar-search form-inline float-right', :id => 'quick_search'}   do |f| %>
-            <%= f.search_field search_field, :class => 'form-control form-control-sm', :placeholder => "Busca rápida"  %>
+            <%= f.search_field search_field, :class => 'form-control form-control-sm', :placeholder => "Adv. search"  %>
 
             <button type="button" class="close pl-1" aria-label="Close">
               <span aria-hidden="true"

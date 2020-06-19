@@ -1,2 +1,30 @@
-<h1>Page not found</h1>
-<p>Whoops we couldn’t find the page you were looking for!</p>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Internal Server Error (500)</title>
+  <%= render partial: 'style' %>
+</head>
+
+<body>
+  <img  class="logo" width="192">
+  <%= render partial: 'browser' %>
+
+  <h1>OOPS... <h2>The page you are searching is no longer available.</h2></h1>
+  <p>
+    You may have mistyped the address or the page may have moved.<br>
+    Please hit back on your browser or <a href="<%= root_path %>">click here</a> to go to your dashboard.
+  </p>
+
+  <div class="dialog">
+    <% if ENV['AMBIENTE'] == 'development' %>
+      <h1>404 - Page not found.</h1>
+      <p>Date:<br>
+        <%=@date %>
+      </p>
+      <p>Error message:<br>
+        <%=@message %>
+      </p>
+    <% end %>
+  </div>
+</body>
+</html>

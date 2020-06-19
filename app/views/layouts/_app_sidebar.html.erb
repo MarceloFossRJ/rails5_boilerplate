@@ -1,0 +1,115 @@
+<%= javascript_tag do %>
+  window.root_path = '<%= j workspace_redirect_domain %>';
+<% end %>
+  <nav role="navigation" class="sidebar sidebar-bg-light rounded" id="navigation">
+    <!-- sidebar -->
+    <div class="sidebar-menu">
+      <!-- menu fixed -->
+      <div class="sidebar-menu-fixed">
+        <!-- menu scrollbar -->
+        <div class="scrollbar scrollbar-bg-light">
+          <!-- menu -->
+          <ul class="list list-unstyled list-bg-light mb-0">
+            <% if user_signed_in? %>
+              <!-- Workspace selector menu -->
+              <li class="list-item text-truncate m-2 cursor-pointer" tabindex="0"
+                  data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-trigger="focus"
+                  data-content="
+                         <div class='border border-light bg-light text-truncate'>
+                            <img src='<%= current_user.avatar.blank? ? gravatar_image_url(current_user.email) : current_user.avatar.url %>' class='rounded m-2 imagesize-small'
+                            <span class='list-title mr-2 '><%= current_user.email %>&nbsp;</span>
+                         </div>
+                         <ul class='list list-unstyled list-bg-light'>
+                            <li><a href='<%= edit_user_registration_path %>' class='list-link'>
+                              <span class='list-icon'><i class='fas fa-user-edit'></i></span>Profile</a></li>
+                            <% if current_user.is_admin?(current_workspace) %>
+                            <li><a href='<%= new_workspace_path %>' class='list-link'>
+                              <span class='list-icon'><i class='fas fa-laptop-medical'></i></span>New Workspace</a></li>
+                            <% end %>
+                            <li><a class='list-link' id='user_signout' rel='nofollow' href='<%= logout_path %>' >
+                              <span class='list-icon'><i class='fas fa-sign-out-alt'></i></span>Sign Out</a></li>
+                         </ul>
+                         <div class='dropdown-divider'></div>
+                         <div class='border border-light bg-light'>
+                            <img src='<%= current_workspace.logo.blank? ? "#" : current_workspace.logo.url %>' class='rounded m-2 imagesize-small'
+                            <span class='list-title ml-2'><%= current_workspace.name.humanize %></span>
+                         </div>
+                         <% if current_user.is_admin?(current_workspace) %>
+                         <ul class='list list-unstyled list-bg-light'>
+                           <li><a href='<%= edit_workspace_path(current_workspace.id) %>' class='list-link'>
+                                <span class='list-icon'><i class='fas fa-laptop-house'></i></span>Workspace Preferences</a></li>
+                           <li><a href='<%= members_path %>' class='list-link'>
+                                <span class='list-icon'><i class='fas fa-user-friends'></i></span>Invite People</a></li>
+                           <div class='list-title text-uppercase mr-0'>Settings</div>
+                         </ul>
+                         <% end %>
+                         <div class='dropdown-divider'></div>
+                         <% Workspace.by_member(current_user.id).each do |w| %>
+                            <% if w.subdomain != current_workspace.subdomain %>
+                                <div class='border border-light bg-light text-truncate'>
+                                  <a href='<%=dashboard_url(subdomain: w.subdomain) %>' class='list-link list-unstiled'>
+                                  <img src='<%= w.logo.blank? ? '#' : w.logo.url %>' class='rounded m-2 imagesize-small'
+                                  <span class='list-title ml-2'><%= w.name.humanize %></span></a>
+                                </div>
+                            <% end %>
+                         <% end %>
+                      ">
+                  <img src="<%=  current_workspace.logo.url unless current_workspace.logo.blank? %>" class="rounded mr-1 imagesize-small">
+                  <span><%= current_workspace.name.humanize %><i class="fa fa-angle-down ml-2"></i></span>
+              </li>
+              <!-- end workspace selector-->
+
+              <!-- Dashboards simple menu -->
+              <li class="list-item">
+                <p class="list-title text-uppercase">Dashboards</p>
+                <ul class="list-unstyled">
+                  <li><a href="<%= dashboard_path %>" class="list-link <%= 'link-current' if current_page?(dashboard_path) %>">
+                    <span class="list-icon"><i class="fas fa-chart-line"></i></span>Main Dashboard</a></li>
+                </ul>
+              </li>
+
+              <!-- Journeys simple menu 
+              <li class="list-item">
+                <div class="container">
+                  <div class="row list-title">
+                    <div class="col-8 text-uppercase">Journeys</div>
+                    <div class="col-4 text-nowrap">
+                      <a href="<%= new_journey_path %>" class="list-link <%= 'link-current' if current_page?(new_journey_path) %>">
+                        <span class="list-icon"><i class="fas fa-plus"></i><i class="fas fa-suitcase"></i></span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <ul class="list-unstyled">
+                  <li><a href="<%= journeys_path %>" class="list-link <%= 'link-current' if current_page?(journeys_path) %>">
+                      <span class="list-icon"><i class="fas fa-suitcase"></i></span>Manage Journeys</a></li>
+                  <li><a href="<%= logbook_index_path %>" class="list-link <%= 'link-current' if current_page?(logbook_index_path) %>">
+                    <span class="list-icon"><i class="fas fa-book-open"></i></span>Logbook</a></li>
+                </ul>
+              </li> -->
+
+              <!-- Reports simple menu -->
+              <li class="list-item">
+                <p class="list-title text-uppercase">Reports</p>
+                <ul class="list-unstyled">
+                  <li><a href="#" class="list-link <%= 'link-current' if 1==2 %>">
+                      <span class="list-icon"><i class="fas fa-file-pdf"></i></span>Report Sample Menu</a></li>
+                </ul>
+              </li>
+            <% else %>
+              <li class="list-item">
+                <p class="list-title text-uppercase"></p>
+                <ul class="list-unstyled">
+                  <li><a href="<%= new_user_registration_path %>" class="list-link">
+                    <span class="list-icon"><i class="fas fa-user-plus"></i></span>Sign Up</a></li>
+
+                  <li><a href="#" class="list-link">
+                    <span class="list-icon"><i class="fas fa-sign-in"></i></span>Login</a></li>
+                </ul>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>

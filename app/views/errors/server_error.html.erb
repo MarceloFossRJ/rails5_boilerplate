@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Internal Server Error (500)</title>
+  <%= render partial: 'style' %>
+</head>
+
+<body>
+  <img  class="logo" width="192">
+  <%= render partial: 'browser' %>
+
+  <h1>OOPS... <h2>Sorry, something went wrong</h2></h1>
+  <p>We're unable to fulfill your request.
+    Rest assured we have been notified and we will be looking into this issue as soon as possible.
+    Please hit back on your browser or <a href="<%= root_path %>">click here</a> to go to your dashboard.
+  </p>
+
+  <div class="dialog">
+    <% if ENV['AMBIENTE'] == 'development' || ENV['AMBIENTE'] == 'docker-development' %>
+      <h1>500 - Internal Server Error.</h1>
+      <p>Date:<br>
+        <%=@date %>
+      </p>
+      <p>Error message:<br>
+        <%=@message %>
+      </p>
+      <p>File:<br>
+        <%=@file %>
+      </p>
+      <p>Line number:<br>
+        <%=@line_number %>
+      </p>
+      <p>Backtrace:<br>
+        <%=@backtrace %>
+      </p>
+      <p>Error source:<br>
+        <%=@source_extracts %>
+      </p>
+    <% end %>
+  </div>
+</body>
+</html>

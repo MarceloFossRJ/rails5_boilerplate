@@ -1,0 +1,11 @@
+
+<h3>Hey <%= @invitation.email %>. Hi!</h3>
+
+<p>You are invited by <%= @sender.name %> to join the workspace <%= @workspace.name %> at the
+  <%=ENV["APPLICATION_NAME"]%>.</p>
+
+<p>So come along and click the link below to start collaborating at <%= @workspace.name %>.</p>
+
+<p><%= root_url %></p>
+
+<p>If you do not know <%= @sender.name %>, please disregard this email.</p>

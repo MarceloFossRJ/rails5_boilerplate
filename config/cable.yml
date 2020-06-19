@@ -1,0 +1,16 @@
+development:
+#  adapter: redis
+#  url: <%= ENV.fetch("CABLE_URL") { "redis://localhost:6379/1" } %>
+#  channel_prefix: journeyctrl_development
+  adapter: async
+
+test:
+  adapter: async
+
+production:
+  adapter: redis
+  url: <%= ENV.fetch("CABLE_URL") %>
+  channel_prefix: <%= ENV.fetch("CABLE_URL").join("_production") %>
+
+
+

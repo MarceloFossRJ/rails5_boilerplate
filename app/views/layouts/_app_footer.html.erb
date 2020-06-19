@@ -1,0 +1,24 @@
+<% if user_signed_in? %>
+  <br><br>
+  <nav class="navbar fixed-bottom navbar-light bg-light">
+    <p class="mb-0 ml-auto">
+      <% if ENV["AMBIENTE"] != 'production' %>
+        <span class="badge badge-pill badge-info mr-2"><%= ENV["AMBIENTE"] %></span>
+      <% end %>
+      <small>
+        <a href="<%= privacy_index_path %>">Privacy ::</a>
+        ENV["APPLICATION_NAME"] v<%= Git::VERSION %>&nbsp;- <%= Git::REVISION %>&nbsp;::&nbsp;<a href="<%= changelog_path %>">Changelog</a>
+      </small>
+    </p>
+
+<% else %>
+  <br><br>
+  <nav class="navbar fixed-bottom navbar-light bg-light">
+    <p class="mb-0 ml-auto">
+      <small>
+        <a href="<%= privacy_index_path %>">Privacy Policy</a>
+      </small>
+    </p>
+  </nav>
+
+<% end %>

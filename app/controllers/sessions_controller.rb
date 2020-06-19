@@ -1,11 +1,14 @@
 class SessionsController < Devise::SessionsController
+  layout "site"
+
   protected
 
   def after_sign_in_path_for(resource)
-    dashboard_path(subdomain: resource.subdomain)
+    #logger.debug ">>> SESSIONS CONTROLLER: #{dashboard_url(subdomain: resource.default_workspace)}"
+    dashboard_url(subdomain: resource.default_workspace )
   end
 
-  def after_sign_out_path_for(resource_name)
-    root_path(subdomain: 'www')
+  def after_sign_out_path_for(resource)
+    homepage_url(subdomain: nil)
   end
 end

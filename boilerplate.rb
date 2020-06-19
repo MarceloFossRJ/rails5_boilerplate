@@ -10,8 +10,15 @@ end
 
 def add_gems
   gem 'figaro'
+  gem 'jquery-rails'
   gem 'rubocop', require: false
+  gem 'inline_svg', '~> 1.7'
+  gem 'bootstrap', '~> 4.5.0'
+  gem 'momentjs-rails' # for date-range-picker
+  gem 'bootstrap-daterangepicker-rails' # date-range-picker booking.com style
+  gem "select2-rails"
   gem "simple_form"
+  gem "paper_trail", '~> 10.3.0'
   gem "ransack"
   gem "kaminari"
   gem "country_select"
@@ -19,11 +26,33 @@ def add_gems
   gem 'mini_magick'
   gem 'money-rails'
   gem 'apartment'
+  gem 'daemons'
   gem 'devise'
-  gem 'jquery-rails'
-  gem 'rainbow'
+  gem 'devise-async' # send emails via sidekiq
+  gem 'omniauth', '~> 1.9.1'
+  gem 'omniauth-google-oauth2', '~> 0.8.0'
+  gem 'omniauth-linkedin-oauth2'
+  gem 'omniauth-github', '~> 1.4.0'
+  gem 'pwned' # implements pawned (hacked) passwords check
+  gem 'pundit' # user authorization
+  gem 'gravatar_image_tag', github: 'mdeering/gravatar_image_tag'
+  gem 'scenic'
+  gem 'prawn' #print to pdf
+  gem 'prawn-table'
+  gem 'rubyzip', '~> 2.3.0'
+  gem 'axlsx', '~> 1.3.6'
+  gem 'caxlsx_rails', '~> 0.6.2'
+  gem 'sidekiq', '~> 6.0.6'
+  gem 'sidekiq-cron', '~> 1.1'
+  gem 'redis'
+  gem 'redis-namespace'
+  gem 'redis-rails'
+  gem 'redis-rack-cache'
+  
   gem_group :development, :test do
-    gem 'better_errors'
+    gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+    gem 'better_errors', github: 'BetterErrors/better_errors'
+    gem "binding_of_caller"
     gem 'guard'
     gem 'guard-livereload'
     gem "rspec-rails"
@@ -31,6 +60,7 @@ def add_gems
     gem "shoulda"
     gem "faker"
     gem 'minitest-reporters'
+    gem 'rails-controller-testing'
     gem "database_cleaner"
   end
 
@@ -38,6 +68,22 @@ def add_gems
     gem 'capybara', '>= 2.15'
     gem 'selenium-webdriver'
     gem 'chromedriver-helper'
+    gem 'simplecov', require: false
+    gem "launchy"
+  end
+  
+  gem_group :developement do
+    gem 'web-console', '>= 3.3.0'
+    gem 'listen', '>= 3.0.5', '< 3.2'
+    gem 'spring'
+    gem 'spring-watcher-listen', '~> 2.0.0'
+    gem 'spring-commands-rspec'
+    gem "capistrano", "~> 3.11", require: false
+    gem "capistrano-rails", "~> 1.4", require: false
+    gem 'capistrano-rvm',     require: false
+    gem 'capistrano-bundler', require: false
+    gem 'capistrano3-puma',   require: false
+    gem 'capistrano-locally', require: false
   end
 end
 
@@ -55,19 +101,6 @@ def set_application_name
   puts "Application name is #{application_name}. You can change this later on: ./config/application.rb"
 end
 
-def add_users
-  # Install Devise
-  generate "devise:install"
-
-  # Configure Devise
-  environment "config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }",
-              env: 'development'
-
-  route "root to: 'home#index'"
-  # Create Devise User
-  generate :devise, "User", "name"
-end
-
 def remove_app_css
   # Remove Application CSS
   run "rm app/assets/stylesheets/application.css"
@@ -79,31 +112,49 @@ def remove_error_pages
   run "rm public/500.html"
 end
 
-def copy_templates
+def copy_app
   directory "app", force: true
 end
 
-def init_guardfile
-  run "guard init livereload"
+def copy_vendor
+  directory "vendor", force: true
 end
 
+def copy_migrations
+  directory "db", force: true
+end
+
+def copy_public
+  directory "public", force: true
+end
+
+def copy_config
+  directory "config", force: true
+end
 
 # Main setup
 add_gems
 
 after_bundle do
   set_application_name
-  add_home
-  add_users
   remove_app_css
   remove_error_pages
-  init_guardfile
 
-  copy_templates
-
+  copy_app
+  copy_vendor
+  copy_migrations
+  copy_public
+  copy_config
+  copy_file "Capfile"
+  copy_file "git_version.sh"
+  copy_file "git_version.yml"
+  copy_file ".rvmrc"
+  copy_file ".rspec"
+  copy_file ".gitignore"
+  
   # Migrate
-  rails_command "db:create"
-  rails_command "db:migrate"
+  #rails_command "db:create"
+  #rails_command "db:migrate"
 
   git :init
   git add: "."
