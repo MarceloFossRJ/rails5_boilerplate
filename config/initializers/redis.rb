@@ -3,4 +3,4 @@
 # $redis.set("test_key", "Hello World!")
 # To fetch this value, just do:
 # $redis.get("test_key")
-$redis = Redis::Namespace.new(env["APPLICATION_NAME"], :redis => Redis.new)
+$redis = Redis::Namespace.new(ENV["APPLICATION_NAME"], :redis => Redis.new)
