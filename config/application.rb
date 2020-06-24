@@ -19,10 +19,7 @@ module Journeyctrl
                        helper_specs: false,
                        routing_specs: false
     end
-
     # sidekiq for active_job
     config.active_job.queue_adapter = :sidekiq
-
-    # session storage - view also => /config/initializers/session_store.rb
   end
 end

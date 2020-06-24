@@ -43,5 +43,6 @@ Rails.application.routes.draw do
       get 'logout', to: 'devise/sessions#destroy'
     end
     get 'dashboard', to: 'dashboards#index', as: :dashboard
+    resources :workspaces
   end
 end

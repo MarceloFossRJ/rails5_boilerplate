@@ -6,12 +6,6 @@
     <%= f.input :subdomain, label: "Subdomain name", disabled: true %>
     <%= f.input :name, label: "Description" %>
     <%= f.input :is_multiuser, wrapper: :custom_boolean_switch %>
-    <%= currency_input "workspace",
-                       "default_currencies",
-                       @workspace.default_currencies.blank? ? [] : @workspace.default_currencies.split,
-                       nil,
-                       true,
-                       true %>
     <%= f.input :user_can_self_exclude, wrapper: :custom_boolean_switch, label: "Users can exclude themselves?" %>
     <%= f.input :user_can_invite, wrapper: :custom_boolean_switch, label: "Users can invite others?" %>
 

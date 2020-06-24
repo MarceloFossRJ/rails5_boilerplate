@@ -24,8 +24,7 @@ class WorkspacesController < ApplicationController
     @workspace = Workspace.new(workspace_params)
     authorize @workspace
     member_params = Hash.new
-    member_params[:owner_id] = current_user.id
-    @workspace.default_currencies = helpers.save_multiselect(params[:workspace][:default_currencies])
+    member_params[:user_id] = current_user.id
     @workspace.create_with_transaction(member_params)
     respond_to do |format|
       if @workspace.persisted?
@@ -39,7 +38,6 @@ class WorkspacesController < ApplicationController
   end
 
   def update
-    @workspace.default_currencies = helpers.save_multiselect(params[:workspace][:default_currencies])
     respond_to do |format|
       if @workspace.update(workspace_params)
         format.html { redirect_to edit_workspace_path(@workspace), notice: 'Workspace was successfully updated.' }

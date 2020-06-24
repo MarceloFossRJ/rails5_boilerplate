@@ -14,6 +14,14 @@ module UserSession
     Thread.current[:user] = user
   end
 
+  def current_workspace
+    Thread.current[:workspace]
+  end
+
+  def self.current_workspace=(workspace)
+    Thread.current[:workspace] = workspace
+  end
+  
   ################
   class Obj
     def initialize(session)

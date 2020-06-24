@@ -2,8 +2,8 @@
 lock "~> 3.12.1"
 
 set :application, ENV["APPLICATION_NAME"]
-set :user, "foss"
-set :repo_url, "git@bitbucket.org:marcelofossrj/journeyctrl.git"
+set :user, ""
+set :repo_url, ""
 set :pty,             true
 set :use_sudo,        false
 set :deploy_via,      :copy #:remote_cache
@@ -40,10 +40,10 @@ namespace :deploy do
       version = version.gsub(";","")
       revision = revision.gsub(";","")
       begin
-        execute "cd #{fetch(:final_path)} && rm journeyctrl_version.yml"
-        puts "%%%===>>> Set_version: JourneyCtrl v#{version} :: rev#{revision}"
-        execute "echo 'version: #{version}' > #{fetch(:final_path)}/journeyctrl_version.yml"
-        execute "echo 'revision: #{revision}' >> #{fetch(:final_path)}/journeyctrl_version.yml"
+        execute "cd #{fetch(:final_path)} && rm git_version.yml"
+        puts "%%%===>>> Set_version: v#{version} :: rev#{revision}"
+        execute "echo 'version: #{version}' > #{fetch(:final_path)}/git_version.yml"
+        execute "echo 'revision: #{revision}' >> #{fetch(:final_path)}/git_version.yml"
 
       rescue
         execute "cd #{fetch(:final_path)} && echo -e 'ERROR retrieving app version date=#{Time.now.utc}'"

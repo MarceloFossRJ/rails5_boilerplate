@@ -45,9 +45,7 @@ def add_gems
   gem 'sidekiq', '~> 6.0.6'
   gem 'sidekiq-cron', '~> 1.1'
   gem 'redis'
-  gem 'redis-namespace'
-  gem 'redis-rails'
-  gem 'redis-rack-cache'
+  gem 'hiredis'
   
   gem_group :development, :test do
     gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -136,7 +134,6 @@ end
 add_gems
 
 after_bundle do
-  set_application_name
   remove_app_css
   remove_error_pages
 
@@ -158,6 +155,8 @@ after_bundle do
     /config/application.yml
     CODE
   end
+  
+  set_application_name
   
   # Migrate
   #rails_command "db:create"

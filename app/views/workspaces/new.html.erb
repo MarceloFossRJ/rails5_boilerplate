@@ -6,7 +6,6 @@
     <%= f.input :subdomain, label: "Subdomain name" %>
     <%= f.input :name, label: "Description" %>
     <%= f.input :is_multiuser, wrapper: :custom_boolean_switch %>
-    <%= currency_input "workspace", "default_currencies", [], nil, true, true %>
     <%= f.input :logo, as: :image_preview, label: "Workspace logo", input_html: {preview_version: :thumb} %>
     <br>&nbsp;
     <%= render 'layouts/default_buttons', return_path: workspaces_path, f: f, add_new: false %>

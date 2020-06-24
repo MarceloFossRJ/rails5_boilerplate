@@ -8,7 +8,6 @@ class User < ApplicationRecord
   has_many :workspaces, through: :memberss
   has_many :invitations_sent, :class_name => 'Invitations', :foreign_key => 'sender_id'
   has_many :received_invitations, :class_name => 'Invitations', :foreign_key => 'recipient_id'
-  has_one  :user_preference
   scope :by_workspace, -> (w) { joins(:members).where(workspace_id: w) }
   scope :by_workspace_subdomain, -> (w) { joins(:workspaces).where(subdomain: w) }
   scope :by_email, -> (u) {where(email: u)}

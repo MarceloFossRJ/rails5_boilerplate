@@ -15,15 +15,13 @@ Rails.application.configure do
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join('tmp', 'caching-dev.txt').exist?
-    config.action_controller.perform_caching = true
-
     #config.cache_store = :memory_store
     config.public_file_server.headers = {
       'Cache-Control' => "public, max-age=#{2.days.to_i}"
     }
   else
     #config.cache_store = :null_store
-    config.action_controller.perform_caching = true
+    config.action_controller.perform_caching = true # default false
   end
 
   # Store uploaded files on the local file system (see config/storage.yml for options)
@@ -58,6 +56,8 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
+  # cache configuration -MFO
+  config.cache_store = :redis_cache_store, { url: ENV['REDIS_URL'] } # ,expires_in: 1.day }
   #Mailer configuration - MFO
   config.action_mailer.perform_deliveries = true
   config.action_mailer.default_url_options = { host: ENV['SENDMAIL_HOST'] }

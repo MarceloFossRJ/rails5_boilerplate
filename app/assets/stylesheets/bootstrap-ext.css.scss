@@ -59,7 +59,7 @@ ul {
 }
 
 .jumbotron {
-  background-image:image-url("site/journeyctrl_1.jpg");
+  background-image:image-url("site/#.jpg");
   color:#fff;
   margin-top: -14px;
   background-attachment: fixed;
@@ -105,3 +105,6 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   color: inherit;
 }
 
+.cursor-pointer{
+  cursor: pointer;
+}

@@ -28,15 +28,9 @@ module CurrencyHelper
   def currency_input(model,
                      field_name="currency",
                      field_value=[],
-                     journey=nil,
                      required=false,
                      multiselect=false,
                      include_blank=true)
-    if journey.nil?
-      default_values = current_workspace.default_currencies.blank? ? [] : current_workspace.default_currencies.split
-    else
-      default_values = Journey.find(journey).default_currencies.blank? ? [] : Journey.find(journey).default_currencies.split
-    end
 
     model = model.downcase
     out  = "<div class='form-group select #{ "required" if required }'>"

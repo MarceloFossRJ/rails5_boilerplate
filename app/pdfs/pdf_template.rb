@@ -7,7 +7,7 @@ class PdfTemplate < Prawn::Document
   TABLE_FONT_SIZE = 9
   TABLE_BORDER_STYLE = :grid
   INFO = {
-      :Creator => "APPLICATION NAME App",
+      :Creator => "#{ENV["APPLICATION_NAME"]} App",
       :Producer => "Prawn",
       :CreationDate => Time.now}
 
@@ -27,7 +27,7 @@ class PdfTemplate < Prawn::Document
 
   def header(title=nil)
     #image "#{Rails.root}/public/logo.png", height: 30
-    text "JourneyCTRL", size: 15, style: :bold, align: :left
+    text "#{ENV["APPLICATION_NAME"].humanize}", size: 15, style: :bold, align: :left
     if title
       text title, size: 14, style: :bold_italic, align: :left
     end
@@ -42,5 +42,3 @@ class PdfTemplate < Prawn::Document
     # ...
   end
 end
-
-# TODO CHANGE APPLICATION NAME

@@ -10,7 +10,6 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
  *= require fontawesome-5/css/all
  *= require bootstrap-datepicker.standalone.min
  *= require daterangepicker
@@ -20,7 +19,9 @@
  *= require sidebar.menu.css
  *= require select2
  *= require select2-bootstrap
+ *= require bootstrap-ext
  *= require_self
+ *= require_tree .
  */
 @import "bootstrap";
 // font-awesome styles
@@ -31,6 +32,8 @@ $fa-font-path: "./fontawesome-5/webfonts";
 
 // Bootstrap replacement font for H tags
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sancreek&display=swap'); //font-family: 'Sancreek', cursive;
+@import url('https://fonts.googleapis.com/css2?family=Rye&display=swap'); //font-family: 'Rye', cursive;
 
 // simple_form helpers
 //@import "simple_form-bootstrap/simple_form-bootstrap";

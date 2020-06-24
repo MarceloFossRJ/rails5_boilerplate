@@ -4,7 +4,7 @@
       <div class="card">
         <div class="card-body">
 
-          <h2 class="text-center">JourneyCtrl Log in</h2>
+          <h2 class="text-center"><%= ENV["APPLICATION_NAME"].humanize %> Log in</h2>
           <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), wrapper: :input_group) do |f| %>
               <%= f.input :email,
                           required: false,

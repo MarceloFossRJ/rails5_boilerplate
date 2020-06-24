@@ -3,8 +3,8 @@ class InviteMailer < ApplicationMailer
     if invitation.recipient_id.nil?
       workspace = Workspace.find(invitation.workspace_id)
       mail(   to:       invitation.email,
-              from:     "SENDER EMAIL",
-              subject:  "Invitation to join #{workspace.name} at APPLICATION NAME"
+              from:     ENV['SUPPORT_EMAIL'],
+              subject:  "Invitation to join #{workspace.name} at #{ENV['APPLICATION_NAME'].humanize}"
       ) do |format|
 
           @invitation = invitation
@@ -20,8 +20,8 @@ class InviteMailer < ApplicationMailer
   def workspace_inclusion(invitation)
     workspace = Workspace.find(invitation.workspace_id)
     mail(   to:       invitation.email,
-            from:     "SENDER EMAIL",
-            subject:  "Invitation to join #{workspace.name} at APPLICATION NAME"
+            from:     ENV['SUPPORT_EMAIL'],
+            subject:  "Invitation to join #{workspace.name} at #{ENV['APPLICATION_NAME'].humanize}"
     ) do |format|
 
       @invitation = invitation
@@ -32,5 +32,3 @@ class InviteMailer < ApplicationMailer
   end
 
 end
-# TODO REPLACE APPLICATION NAME
-# TODO REPLACE SENDER

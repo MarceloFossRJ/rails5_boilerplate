@@ -1,6 +1,6 @@
 
-<h1>Welcome to JourneyCTRL!</h1>
-<p>Hi, <%= @user.name %> thanks for joining ENV["APPLICATION_NAME"].</p>
+<h1>Welcome to <%= ENV["APPLICATION_NAME"].humanize %>!</h1>
+<p>Hi, <%= @user.name %> thanks for joining <%= ENV["APPLICATION_NAME"].humanize %>.</p>
 <p>Your registration is now complete, your account is activated and you can start using the app.</p>
 <p style="text-align: center;">
   <a href="<%= ENV["SENDMAIL_HOST"] %>" class="btn btn-primary">Start Here!</a>

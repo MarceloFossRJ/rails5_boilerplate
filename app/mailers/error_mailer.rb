@@ -12,7 +12,7 @@ class ErrorMailer < ApplicationMailer
 
   def server_error(date, message, file, line_number, backtrace, souce_extracts)
     mail(   to:       ENV['SUPPORT_EMAIL'],
-            subject:  "Application Name - #{ENV['AMBIENTE']} [500]"
+            subject:  "#{ENV['APPLICATION_NAME'].humanize} - #{ENV['AMBIENTE']} [500]"
     ) do |format|
       @date = date
       @message = message

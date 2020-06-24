@@ -4,8 +4,18 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :redirect_to_subdomain
   before_action :set_user_session
+  helper_method :current_workspace
+  helper_method :my_workspaces
   layout "application"
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
+  def current_workspace
+    session[:current_workspace]
+  end
+
+  def my_workspaces
+    session[:my_workspaces]
+  end
 
   def create_redirect_path(action)
     if action == 'add'
@@ -64,7 +74,7 @@ class ApplicationController < ActionController::Base
               redirect_to homepage_url
             end
           end
-          if subdomain != session[:current_workspace].subdomain
+          if subdomain != session[:current_workspace].nil? ? "0" : session[:current_workspace].subdomain
             workspaces = Workspace.by_member(current_user.id).pluck(:subdomain)
             # check if user is a member of the referred workspace
             if workspaces

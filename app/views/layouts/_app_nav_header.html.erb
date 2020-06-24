@@ -8,7 +8,7 @@
     </button>
 
     <!-- title / brand -->
-    <a class="navbar-brand navbar-brand-width " href="<%= current_user ? dashboard_path : root_path %>">ENV["APPLICATION_NAME"]</a>
+    <a class="navbar-brand navbar-brand-width " href="<%= current_user ? dashboard_path : root_path %>"><%= ENV["APPLICATION_NAME"].humanize %></a>
       <div class="collapse navbar-collapse" id="n">
       </div>
   </nav>

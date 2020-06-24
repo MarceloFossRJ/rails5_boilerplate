@@ -2,7 +2,7 @@
 <h3>Hey <%= @invitation.email %>. Hi!</h3>
 
 <p>You were invited by <%= @sender.name %> to join the workspace <%= @workspace.name %> at the
-<%=ENV["APPLICATION_NAME"]%>.</p>
+<%= ENV["APPLICATION_NAME"].humanize %>.</p>
 
 <p>So come along and follow the link below to join it and register yourself to <%= @workspace.name %>.</p>
 

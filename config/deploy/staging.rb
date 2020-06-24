@@ -1,5 +1,5 @@
 
-server 'ethanol.f055.com', roles: [:web, :app, :db], primary: true
+server '', roles: [:web, :app, :db], primary: true
 
 set :branch,          "master"
 set :stage,           :staging
@@ -7,8 +7,10 @@ set :deploy_to,       "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
 set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub) }
 set :keep_releases, 2
 set :final_path,      "#{fetch(:deploy_to)}/#{fetch(:application)}"
+set :local_env_path,  "" # Rails.root
+set :server_url,     ""
 
-append :linked_files, 'staging.env'
+append :linked_files, 'docker-stg.env'
 
 namespace :deploy do
   desc 'stop application'
@@ -21,7 +23,7 @@ namespace :deploy do
   desc "Copy env files"
   task :copy_env do
     run_locally do
-      execute "rsync -ah --progress /Users/foss/Dropbox/dev/ruby/f055/jouneyctrl/journeyctrl/staging.env #{fetch(:user)}@ethanol.f055.com:#{fetch(:deploy_to)}/shared"
+      execute "rsync -ah --progress #{fetch(:local_env_path)}/staging.env #{fetch(:user)}@#{fetch(:server_url)}:#{fetch(:deploy_to)}/shared"
     end
   end
 

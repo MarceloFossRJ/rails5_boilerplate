@@ -6,6 +6,7 @@ set :stage,           :development
 set :deploy_to,       "/users/#{fetch(:user)}/docker/#{fetch(:application)}"
 set :keep_releases,   1
 set :final_path,      "#{fetch(:deploy_to)}/#{fetch(:application)}"
+set :local_path, "" #Rails.root
 
 append :linked_files, '.env'
 
@@ -13,7 +14,7 @@ namespace :deploy do
   desc "Copy env files"
   task :copy_env do
     run_locally do
-      execute "mkdir -p #{fetch(:deploy_to)}/shared/ && cp /Users/foss/Dropbox/dev/ruby/f055/jouneyctrl/journeyctrl/development.env #{fetch(:deploy_to)}/shared/.env"
+      execute "mkdir -p #{fetch(:deploy_to)}/shared/ && cp #{fetch(:local_path)}/development.env #{fetch(:deploy_to)}/shared/.env"
     end
   end
 
