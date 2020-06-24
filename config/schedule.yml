@@ -1,6 +1,4 @@
-=begin
 job_name:
   cron: "0 2 * * *"
   class: "jobClass"
   queue: default
-=end
