@@ -1,0 +1,8 @@
+<%%= render partial: 'layouts/header', locals: {title: '<%= singular_table_name.titleize %>'} %>
+<%%= render partial: 'layouts/tabs', locals: {controller_class: controller_name , action: "show", search_field:""} %>
+<% attributes.reject(&:password_digest?).each do |attribute| -%>
+<p>
+  <strong><%= attribute.human_name %>:</strong>
+  <%%= @<%= singular_table_name %>.<%= attribute.name %> %>
+</p>
+<% end -%>

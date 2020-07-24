@@ -110,6 +110,10 @@ def remove_error_pages
   run "rm public/500.html"
 end
 
+def copy_lib
+  directory "lib", force: true
+end
+
 def copy_app
   directory "app", force: true
 end
@@ -142,6 +146,7 @@ after_bundle do
   copy_migrations
   copy_public
   copy_config
+  copy_lib
   copy_file "Capfile"
   copy_file "git_version.sh"
   copy_file "git_version.yml"

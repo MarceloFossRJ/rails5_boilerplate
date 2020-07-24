@@ -1,0 +1,4 @@
+<%%= render partial: 'layouts/header', locals: {title: 'New <%= singular_table_name.titleize %>'} %>
+<%%= render partial: 'layouts/tabs', locals: {controller_class: controller_name , action: "new", search_field:""} %>
+
+<%%= render 'form', <%= singular_table_name %>: @<%= singular_table_name %> %>

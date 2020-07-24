@@ -1,0 +1,9 @@
+<div class="form-element-align">
+    <%%= simple_form_for <%= model_resource_name %>, wrapper: :input_group do |f| %>
+    <% attributes.each do |attribute| -%>
+    <%%= f.input :<%= attribute.column_name %> %>
+    <% end -%>
+
+      <%%= render 'layouts/default_buttons', return_path: <%= plural_table_name %>_path, f: f, add_new: true %>
+    <%% end %>
+</div>
